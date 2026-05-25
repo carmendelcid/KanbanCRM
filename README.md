@@ -7,11 +7,16 @@ Este proyecto transforma una tabla estándar en un tablero interactivo, pero va 
 
 ## 🏗️ Arquitectura de Microservicios y Automatización
 
-Este proyecto sigue una arquitectura desacoplada:
-* **Frontend (Capa de Presentación):** Componente PCF en React/TypeScript. Interfaz drag-and-drop con visualización dinámica de enlaces a repositorios.
-* **Backend (Capa Lógica y Seguridad):** Plugin síncrono en C# (.NET) para validación de reglas de negocio (Límites WIP).
-* **Agente IA & API REST (Capa de Procesamiento):** Backend en Python (Flask) conectado a LLaMA 3.1 (vía Groq API) para la resolución de código, y a la **GitHub API (PyGithub)** para la ejecución de *commits* automáticos.
-* **Orquestación (Capa de Automatización):** Microsoft Power Automate. Gestiona el ciclo de vida de la tarea, actuando como puente entre Dataverse, la IA y GitHub, asegurando que el código solo se despliegue tras la aprobación del Tech Lead (arrastrando la tarjeta a "Finalizado").
+Este proyecto sigue una arquitectura desacoplada. Puedes consultar el código de los otros microservicios en sus respectivos repositorios:
+
+* **Frontend (Capa de Presentación)** 👉 **[ESTÁS AQUÍ]**
+  Componente PCF en React/TypeScript. Interfaz drag-and-drop con visualización dinámica de enlaces a repositorios.
+* **Backend (Capa Lógica y Seguridad)** 👉 **[Ver Repositorio del Plugin C#]((https://github.com/carmendelcid/KanbanPlugins))**
+  Plugin síncrono en C# (.NET) para validación de reglas de negocio (Límites WIP).
+* **Agente IA & API REST (Capa de Procesamiento)** 👉 **[Ver Repositorio del Agente Python]((https://github.com/carmendelcid/API_Python))**
+  Backend en Python (Flask) conectado a LLaMA 3.1 (vía Groq API) para la resolución de código, y a la GitHub API (PyGithub) para la ejecución de *commits* automáticos.
+* **Orquestación (Capa de Automatización)**
+  Microsoft Power Automate. Gestiona el ciclo de vida de la tarea, actuando como puente entre Dataverse, la IA y GitHub.
 
 ## ✨ Características Principales
 
@@ -22,12 +27,13 @@ Este proyecto sigue una arquitectura desacoplada:
 * **Optimistic UI:** El movimiento de las tarjetas es instantáneo en la pantalla del usuario antes de que el servidor confirme el cambio en la base de datos, eliminando tiempos de carga visuales.
 * **Diseño Corporativo:** Interfaz de usuario construida con Fluent UI (la librería oficial de Microsoft) para mantener la coherencia visual con Dynamics 365 / Power Apps.
 
-## ⚙️ Despliegue y Compilación
+## ⚙️ Despliegue y Compilación Local (Frontend PCF)
 
-### 1. Entorno Frontend (Componente PCF)
 Para clonar y compilar este entorno de React en local, se requiere Node.js instalado.
+
 ```bash
-# Instalar las dependencias del proyecto
+# 1. Instalar las dependencias del proyecto
 npm install
-# Compilar el código y generar el empaquetado para Dataverse
+
+# 2. Compilar el código y generar el empaquetado para Dataverse
 npm run build
