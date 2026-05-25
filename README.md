@@ -31,6 +31,3 @@ Para clonar y compilar este entorno de React en local, se requiere Node.js insta
 npm install
 # Compilar el código y generar el empaquetado para Dataverse
 npm run build
-
-# Compilar el código y generar el empaquetado para Dataverse
-npm run build
