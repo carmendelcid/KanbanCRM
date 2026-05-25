@@ -11,9 +11,9 @@ Este proyecto sigue una arquitectura desacoplada. Puedes consultar el código de
 
 * **Frontend (Capa de Presentación)** 👉 **[ESTÁS AQUÍ]**
   Componente PCF en React/TypeScript. Interfaz drag-and-drop con visualización dinámica de enlaces a repositorios.
-* **Backend (Capa Lógica y Seguridad)** 👉 **[Ver Repositorio del Plugin C#]((https://github.com/carmendelcid/KanbanPlugins))**
+* **Backend (Capa Lógica y Seguridad)** 👉 **[Ver Repositorio del Plugin C#](https://github.com/carmendelcid/KanbanPlugins)**
   Plugin síncrono en C# (.NET) para validación de reglas de negocio (Límites WIP).
-* **Agente IA & API REST (Capa de Procesamiento)** 👉 **[Ver Repositorio del Agente Python]((https://github.com/carmendelcid/API_Python))**
+* **Agente IA & API REST (Capa de Procesamiento)** 👉 **[Ver Repositorio del Agente Python](https://github.com/carmendelcid/API_Python)**
   Backend en Python (Flask) conectado a LLaMA 3.1 (vía Groq API) para la resolución de código, y a la GitHub API (PyGithub) para la ejecución de *commits* automáticos.
 * **Orquestación (Capa de Automatización)**
   Microsoft Power Automate. Gestiona el ciclo de vida de la tarea, actuando como puente entre Dataverse, la IA y GitHub.
