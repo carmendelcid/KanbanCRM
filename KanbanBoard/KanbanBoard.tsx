@@ -8,6 +8,7 @@ export interface ITarea {
     id: string;
     titulo: string;
     estado: string;
+    repoUrl: string; 
 }
 
 export interface IKanbanBoardProps {
@@ -18,16 +19,16 @@ export interface IKanbanBoardProps {
 }
 
 const containerStyles: IStackStyles = {
-    root: { display: 'flex', flexDirection: 'row', width: '100%', minHeight: '100vh', padding: '20px', gap: '20px', backgroundColor: '#f3f2f1', fontFamily: 'Segoe UI, sans-serif' }
+    root: { display: 'flex', flexDirection: 'row', width: '100%', minHeight: '100vh', padding: '20px', gap: '20px', backgroundColor: '#f3f2f1' }
 };
 
 const columnStyles = (colorElegido: string): React.CSSProperties => ({
-    flex: 1, backgroundColor: 'white', borderRadius: '8px', padding: '15px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', borderTop: `6px solid ${colorElegido}`, display: 'flex', flexDirection: 'column', gap: '10px', overflow: 'hidden'
+    flex: 1, backgroundColor: 'white', borderRadius: '8px', padding: '15px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', borderTop: `6px solid ${colorElegido}`
 });
 
 export const KanbanBoard: React.FC<IKanbanBoardProps> = (props) => {
     const colorSeguro = (props.primaryColor === 'val' || !props.primaryColor) ? '#0078d4' : props.primaryColor;
-    
+
     // UI OPTIMISTA: Estado local para que el arrastre sea instantáneo
     const [tareasLocales, setTareasLocales] = useState<ITarea[]>([]);
 
@@ -64,14 +65,14 @@ export const KanbanBoard: React.FC<IKanbanBoardProps> = (props) => {
             <div style={columnStyles(colorSeguro)} key={estadoFiltro}>
                 <h3 style={{ textAlign: 'center', color: '#323130', margin: '0 0 10px 0' }}>{icono} {tituloColumna}</h3>
                 <hr style={{ border: '1px solid #edebe9', width: '100%', marginBottom: '15px' }}/>
-                
+
                 {/* ZONA DONDE SE PUEDE SOLTAR */}
                 <Droppable droppableId={estadoFiltro}>
                     {(provided) => (
-                        <div 
-                            {...provided.droppableProps} 
+                        <div
+                            {...provided.droppableProps}
                             ref={provided.innerRef}
-                            style={{ flexGrow: 1, minHeight: '100px' }} 
+                            style={{ flexGrow: 1, minHeight: '100px' }}
                         >
                             {tareasColumna.length === 0 ? (
                                 <p style={{ textAlign: 'center', color: '#605e5c', fontStyle: 'italic' }}>Sin tareas</p>
@@ -88,13 +89,27 @@ export const KanbanBoard: React.FC<IKanbanBoardProps> = (props) => {
                                                     ...provided.draggableProps.style,
                                                     marginBottom: '10px',
                                                     // Hacemos que sea un poco transparente mientras vuela
-                                                    opacity: snapshot.isDragging ? 0.8 : 1 
+                                                    opacity: snapshot.isDragging ? 0.8 : 1
                                                 }}
                                             >
-                                                <DocumentCard style={{ padding: '15px', width: '100%', maxWidth: '100%', minWidth: 'auto', boxSizing: 'border-box', borderLeft: `4px solid ${colorSeguro}` }}>
+                                                <DocumentCard style={{ padding: '15px', width: '100%', maxWidth: '100%', minWidth: 'auto', boxSizing: 'border-box' }}>
                                                     <div style={{ fontWeight: '600', color: '#323130', whiteSpace: 'normal', wordWrap: 'break-word' }}>
                                                         {tarea.titulo}
                                                     </div>
+
+                                                    {/* BOTÓN DE GITHUB AÑADIDO AQUÍ */}
+                                                    {tarea.repoUrl && tarea.repoUrl !== "" && (
+                                                        <div style={{ marginTop: '12px', borderTop: '1px solid #edebe9', paddingTop: '8px' }}>
+                                                            <a 
+                                                                href={tarea.repoUrl} 
+                                                                target="_blank" 
+                                                                rel="noopener noreferrer" 
+                                                                style={{ fontSize: '12px', color: '#0078d4', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '5px' }}
+                                                            >
+                                                                🔗 Ver en GitHub
+                                                            </a>
+                                                        </div>
+                                                    )}
                                                 </DocumentCard>
                                             </div>
                                         )}

@@ -5,7 +5,7 @@ import { createRoot, Root } from "react-dom/client";
 import { KanbanBoard as KanbanReact, IKanbanBoardProps, ITarea } from "./KanbanBoard";
 
 export class KanbanBoard implements ComponentFramework.StandardControl<IInputs, IOutputs> {
-    
+
     private _container: HTMLDivElement;
     private _root: Root;
     private _context: ComponentFramework.Context<IInputs>;
@@ -17,9 +17,9 @@ export class KanbanBoard implements ComponentFramework.StandardControl<IInputs, 
     }
 
     private handleStatusChange = (tareaId: string, nuevoEstado: string): void => {
-        console.log("🛠️ Iniciando movimiento de tarjeta...");
+        console.log("🚀 Iniciando movimiento de tarjeta...");
         const dataset = this._context.parameters.tasksDataset as any;
-        
+
         // 1. Buscamos el nombre real de la columna dentro de las propiedades del Dataset
         let nombreLogicoColumna = "";
         const columnas = dataset.columns || [];
@@ -77,7 +77,8 @@ export class KanbanBoard implements ComponentFramework.StandardControl<IInputs, 
                 listaTareas.push({
                     id: recordId,
                     titulo: record.getFormattedValue("titleProperty") || "Sin título",
-                    estado: record.getFormattedValue("statusProperty") || ""
+                    estado: record.getFormattedValue("statusProperty") || "",
+                    repoUrl: record.getFormattedValue("repoProperty") || "" 
                 });
             }
         }
@@ -85,7 +86,7 @@ export class KanbanBoard implements ComponentFramework.StandardControl<IInputs, 
         const props: IKanbanBoardProps = {
             primaryColor: colorElegido,
             tareas: listaTareas,
-            onStatusChange: this.handleStatusChange 
+            onStatusChange: this.handleStatusChange
         };
 
         this._root.render(React.createElement(KanbanReact, props));
